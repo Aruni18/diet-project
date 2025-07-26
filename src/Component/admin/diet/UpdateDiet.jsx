@@ -2,6 +2,7 @@ import { addDoc, collection,doc,getDoc,Timestamp, updateDoc } from "firebase/fir
 import { useState, useEffect } from "react"
 import {db } from "../../../firebase"
 import { toast } from "react-toastify"
+import axios from "axios"
 import { useNavigate, Link, useParams } from "react-router-dom"
 
 export default function UpdateDiet(){
@@ -35,7 +36,7 @@ export default function UpdateDiet(){
       e.preventDefault()
      // createUserWithEmailAndPassword(auth,email,password)
       try{
-        const id=Date.now().toString();
+        //const id=Date.now();
         await saveData(id)
       }
       catch(err){
@@ -75,7 +76,7 @@ export default function UpdateDiet(){
            toast.error(err.message)
       }
     }
-    // const nav=useNavigate()
+     const nav=useNavigate()
     // const getUserData=async(userId)=>{
     //   let userDoc=await getDoc(doc(db, "users", userId))
     //   let userData=userDoc.data()

@@ -5,6 +5,7 @@ import { toast } from "react-toastify"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
 import { PacmanLoader } from "react-spinners"
+import { FaTrash, FaEdit } from "react-icons/fa"
 import axios from "axios"
 
 export default function ManageDiet(){
@@ -44,7 +45,7 @@ export default function ManageDiet(){
        .then(()=>{
              //toast.success("item is deleted")
               Swal.fire({
-            title: "Deleted!",
+            title: "Blocked!",
             text: "Your file has been deleted.",
             icon: "success"
           });
@@ -128,10 +129,18 @@ export default function ManageDiet(){
                                   {/* <td><img className="img-fluid" src={el.image} alt="" /></td> */}
 
                                   <td>
-                                    <Link to={"/admin/Pages/edit/"+el.id }className="btn btn-success mx-2">Edit</Link>
-                                    <button className="btn btn-danger " onClick={()=>{
+                                    <Link to={"/admin/Pages/edit/"+el.id }className="text-success mx-2" title="edit">
+                                    {/* <button className="btn btn-danger " onClick={()=>{
                                     DeleteDiet(el.id)
-                                  }}>Delete</button></td>
+                                  }}>Delete</button> */}
+                                  <FaEdit style={{cursor:"pointer", fontSize:"1.2rem"}}/></Link>
+                                  <FaTrash 
+                                     className="text-danger"
+                                     style={{cursor:"pointer", fontSize:"1.2rem"}}
+                                     title="delete"
+                                     onClick={()=>DeleteDiet(el.id)}
+                                  />
+                                  </td>
                                   
                                 </tr>
                           </tbody>

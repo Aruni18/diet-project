@@ -135,15 +135,35 @@ export default function AdminHeader(){
               Add Diet
             </Link>
           </li> */}
-          <li className="nav-item">
-            <Link to={"/admin/Pages/DietDetails"} className="nav-link">
-              Diet Details
-            </Link>
+          <li class="dropdown nav-item">
+            <a  class="nav-link dropdown-toggle" href="#" role="button" id="dropdpwnMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Add
+            </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <Link class="dropdown-item" to={"/admin/Pages/add"}>Add diet</Link>
+                <Link class="dropdown-item" to={"/admin/Pages/DietDetails"}>Diet Details</Link>
+              </div>  
           </li>
+{/* 
           <li className="nav-item">
             <Link to={"/admin/Pages/manageDiet" }className="nav-link">
               Manage Diet
             </Link>
+          </li> */}
+
+           <li class="dropdown nav-item">
+            <a  class="nav-link dropdown-toggle" href="#" role="button" id="dropdpwnMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manage 
+            </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <Link class="dropdown-item" to={"/admin/Pages/manageDiet"}>Diet</Link>
+                <Link class="dropdown-item" to={"/admin/diet/user/ManageUser"}>View Users</Link>
+                {/* <Link class="dropdown-item" to={"/admin/Pages/DietDetails"}>Subscription</Link> */}
+              </div>  
           </li>
           <li className="nav-item">
             <Link to={"/admin/subscription" }className="nav-link">

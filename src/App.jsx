@@ -1,6 +1,6 @@
 import { BrowserRouter,Route, Routes } from "react-router-dom"
 
-import Home from "./Component/Pages/Home"
+import Home from "./Component/pages/Home"
 import About from "./Component/Pages/About"
 import Coach from "./Component/Pages/Coach"
 import Pricing from "./Component/Pages/Pricing"
@@ -18,6 +18,7 @@ import DietDetails from "./Component/admin/diet/DietDetails"
 import ManageDiet from "./Component/admin/diet/ManageDiet"
 import UpdateDiet from "./Component/admin/diet/UpdateDiet"
 import ManageUser from "./Component/admin/diet/user/ManageUser"
+import Dashboard from "./Component/admin/diet/pages/Dashboard"
 function App() {
   return (
    <>
@@ -39,10 +40,12 @@ function App() {
       
          {/*admin layout*/}
           <Route path="/admin" element={<AdminLayout/>} >
+               <Route index element={<Dashboard/>}/>
                <Route path="Pages/add" element={<AddDiet/>} /> 
                <Route path="Pages/DietDetails" element={<DietDetails/>} /> 
                <Route path="Pages/manageDiet" element={<ManageDiet/>} /> 
                <Route path="Pages/edit/:id" element={<UpdateDiet/>} /> 
+               <Route path="diet/user/ManageUser" element={<ManageUser/>} /> 
           </Route>
 
         </Routes>  

@@ -7,17 +7,17 @@ import axios from "axios"
 export default function DietDetails(){
     const [diet, setDiet]=useState("")
     const [day, setDay]=useState("")
-    const [meal, setMeal]=useState("")
-    const [time, setTime]=useState("")
-    const [protien, setProtien]=useState("")
-    const [item,setItem]=useState("")
-    const [corbs, setCorbs]=useState("")
-    const [quantity,setQuantity]=useState("")
-    const [fats,setFats]=useState("")
-    const [calorie, setCalorie]=useState("")
-    const [fibre, setFibre]=useState("")
-    const [recipe, setRecipe]=useState("")
-    const [sugar,setSugar]=useState("")
+    // const [meal, setMeal]=useState("")
+    // const [time, setTime]=useState("")
+    // const [protien, setProtien]=useState("")
+    // const [item,setItem]=useState("")
+    // const [corbs, setCorbs]=useState("")
+    // const [quantity,setQuantity]=useState("")
+    // const [fats,setFats]=useState("")
+    // const [calorie, setCalorie]=useState("")
+    // const [fibre, setFibre]=useState("")
+    // const [recipe, setRecipe]=useState("")
+    // const [sugar,setSugar]=useState("")
     const [image,setImage]=useState({})
     const [imageName, setImageName]=useState("")
 
@@ -25,13 +25,12 @@ export default function DietDetails(){
         e.preventDefault()
         const formData=new FormData()
         formData.append("file", image)
-        formData.append("upload_preset", "dietPreset")
+        formData.append("upload_preset", "images")
 
         try{
             const response=await axios.post(
               `https://api.cloudinary.com/v1_1/dnf1wdk1k/image/upload`,
                 formData
-                
             )
             saveData(response.data.secure_url)
 
@@ -40,38 +39,40 @@ export default function DietDetails(){
             toast.error("Error uploading image: ", error.message)
         }
     }
+
     const changeImage=(e)=>{
         setImageName(e.target.value)
-        setImage(e.target.files[0])
+        setImage(e.target.files[0]);
     }
 
     const saveData=async(imageUrl)=>{
         try{
             let data={
-            diet,day, meal, time, protien, corbs,quantity, fats,
-            calorie,fibre, recipe,sugar,
+            diet,day, 
+            // meal, time, protien, corbs,quantity, fats,
+            // calorie,fibre, recipe,sugar,
             image:imageUrl,
             status:true,
             createdAt:Timestamp.now()
           }
 
-            console.log(data)
-            addDoc(collection(db, "collectionName"), data)
+            // console.log(data)
+            // addDoc(collection(db, "collectionName"), data)
             await addDoc(collection(db, "admin"), data)
             toast.success("dietdetails added successfully")
             setDiet("")
             setDay("")
             setMeal("")
-            setTime("")
-            setProtien("")
-            setItem("")
-            setCorbs("")
-            setQuantity("")
-            setFats("")
-            setCalorie("")
-            setFibre("")
-            setRecipe("")
-            setSugar("")
+            // setTime("")
+            // setProtien("")
+            // setItem("")
+            // setCorbs("")
+            // setQuantity("")
+            // setFats("")
+            // setCalorie("")
+            // setFibre("")
+            // setRecipe("")
+            // setSugar("")
             setImage({})
             setImageName("")
             setUrl("")
@@ -106,8 +107,8 @@ export default function DietDetails(){
         </div>
       </div>
     </div>
-  </section>
-  <section className="ftco-section bg-light">
+   </section>
+   <section className="ftco-section bg-light">
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-10" style={{boxShadow:"0px 0px 15px blue"}}>
@@ -137,7 +138,7 @@ export default function DietDetails(){
                             onChange={(e)=>{
                                 setDiet(e.target.value)
                             }}>
-                            <option disabled selected value={""}>--choose one--</option>
+                            <option disabled value={""}>--choose one--</option>
                             <option> type 1</option>
                              <option> type 2</option>
                           </select>
@@ -161,7 +162,8 @@ export default function DietDetails(){
                           />
                         </div>
                       </div> 
-                      <div className="col-md-6">
+
+                      {/* <div className="col-md-6">
                         <div className="form-group" >
                           <label className="label" htmlFor="subject">
                             Meal
@@ -205,6 +207,7 @@ export default function DietDetails(){
 
                         </div>
                       </div>
+
                        <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="#">
@@ -318,6 +321,7 @@ export default function DietDetails(){
                           />
                         </div>
                       </div>
+
                       <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="#">
@@ -355,6 +359,7 @@ export default function DietDetails(){
                           />
                         </div>
                       </div>
+
                        <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="#">
@@ -373,6 +378,7 @@ export default function DietDetails(){
                           />
                         </div>
                       </div>
+
                        <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="#">
@@ -390,11 +396,11 @@ export default function DietDetails(){
                             }}
                           />
                         </div>
-                      </div>
+                      </div> */}
 
                        <div className="col-md-6">
                         <div className="form-group">
-                          <label className="label" htmlFor="#">
+                          <label className="label" htmlFor="image">
                                Image
                           </label>
                           <input
@@ -429,7 +435,7 @@ export default function DietDetails(){
         </div>
        </div>
     </div>
-  </section>
+   </section>
         </>
     )
 }

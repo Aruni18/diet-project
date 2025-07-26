@@ -3,7 +3,7 @@ import { useState } from "react"
 import {Link, useNavigate} from "react-router-dom"
 import { toast } from "react-toastify"
 import {auth, db} from "../../firebase"
-import {doc, getDoc} from "firebase/firestore"
+import {doc, getDoc, setDoc,Timestamp} from "firebase/firestore"
 
 export default function Login(){
     const [email, setEmail]=useState("user8@gmail.com")
@@ -30,6 +30,7 @@ export default function Login(){
     const getUserData=async(userId)=>{
       let userDoc= await getDoc(doc(db, "users", userId))
       let userData=userDoc.data()
+      if(userData?.status){
       sessionStorage.setItem("name", userData?.name)
       sessionStorage.setItem("email", userData?.email)
       sessionStorage.setItem("userType", userData?.userType)
@@ -42,7 +43,10 @@ export default function Login(){
       else{
         nav("/")
       }
+    }else{
+      toast.error("Your account has been blocked...")
     }
+  }
 
     const signInGoogle=()=>{
       let provider=new GoogleAuthProvider()
@@ -52,12 +56,33 @@ export default function Login(){
         //  toast.success("Login successfully..")
         //  nav("/")
         let userId=userCred.user.uid
-        getUserData(userId)
+        saveData(userCred, userId)
+       // getUserData(userId)
       })
       .catch((err)=>{
         toast.error(err.message)
       })
     }
+
+   const saveData=async (userId)=>{
+           try{
+               let data={
+                   name:userCred.user.displayName,
+                   email:userCred.user.email,
+                   contact:userCred.user.contact,
+                   userId:userId,
+                   userType:2,
+                   status: true,
+                   createdAt:Timestamp.now()
+               }
+               await setDoc(doc(db, "users", userId), data)
+               toast.success("Register Successfully....")
+               getUserData(userId)
+           }
+           catch(err){
+               toast.error(err.message)
+           }
+       }
 
     return(
       <>
@@ -124,20 +149,7 @@ export default function Login(){
                           />
                         </div>
                       </div>
-                      {/* <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="label" htmlFor="email">
-                            Email Address
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control"
-                            name="email"
-                            id="email"
-                            placeholder="Email"
-                          />
-                        </div>
-                      </div> */}
+                      
                       <div className="col-md-12">
                         <div className="form-group">
                           <label className="label" htmlFor="subject">
