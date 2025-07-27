@@ -161,6 +161,7 @@ export default function AdminHeader(){
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <Link class="dropdown-item" to={"/admin/Pages/manageDiet"}>Diet</Link>
+                 <Link class="dropdown-item" to={"/admin/diet/ManageDietDetails"}>Diet Details</Link>
                 <Link class="dropdown-item" to={"/admin/diet/user/ManageUser"}>View Users</Link>
                 {/* <Link class="dropdown-item" to={"/admin/Pages/DietDetails"}>Subscription</Link> */}
               </div>  

@@ -72,7 +72,7 @@ export default function ManageUser(){
                Admin Panel <i className="ion-ios-arrow-forward" />
             </span>
           </p>
-          <h1 className="mb-0 bread">Manage diet </h1>
+          <h1 className="mb-0 bread">View Users</h1>
         </div>
       </div>
     </div>
@@ -84,17 +84,13 @@ export default function ManageUser(){
     :
       <div className="row justify-content-center">
         <div className="col-md-18" style={{boxShadow:"0px 0px 15px royalblue"}}>
-
-             {/* <div className="d-flex justify-content-end p-2">
-                 <Link to={"/admin/Pages/add"}  className="btn btn-outline-primary">Add Diet</Link>
-             </div> */}
              
                 <div className="contact-wrap w-100 p-md-5 p-4">
                   <h3 className="mb-4">Manage Users</h3>
                   <table className="table table-bordered table-hover table-striped">
                       <thead className="table-dark">
                          <tr>
-                           <th scope="col">S.No.</th>
+                           <th scope="col">#</th>
                            <th scope="col">Name</th>
                            <th scope="col">Email</th>
                            <th scope="col">Password</th>
@@ -128,7 +124,7 @@ export default function ManageUser(){
                                   </td>
                                   <td>
                                     <Switch checked={el?.status} onChange={()=>{
-                                      changeStatus(el?.id, el?.status)
+                                      changeStatus(el?.id,el?.status)
                                     }} />
                                   </td>
                                 </tr>)
@@ -140,11 +136,6 @@ export default function ManageUser(){
                 </div>
               </div>
           </div> 
-          
-              //     </div>
-               //  </div>
-
-    
           }</div>
        {/* </section> */}
       </>

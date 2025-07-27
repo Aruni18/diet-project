@@ -16,9 +16,6 @@ export default function Login(){
         e.preventDefault()
         signInWithEmailAndPassword(auth,email,password)
         .then((userCred)=>{
-            // console.log("sign in", userCred.user.uid)
-            // toast.success("Login Successfully...")
-            // nav("/")
             let userId=userCred.user.uid 
             getUserData(userId)
         })
@@ -52,19 +49,15 @@ export default function Login(){
       let provider=new GoogleAuthProvider()
       signInWithPopup(auth, provider)
       .then((userCred)=>{
-        //  console.log(userCred.user.uid)
-        //  toast.success("Login successfully..")
-        //  nav("/")
         let userId=userCred.user.uid
         saveData(userCred, userId)
-       // getUserData(userId)
       })
       .catch((err)=>{
         toast.error(err.message)
       })
     }
 
-   const saveData=async (userId)=>{
+   const saveData=async (userId,userCred)=>{
            try{
                let data={
                    name:userCred.user.displayName,

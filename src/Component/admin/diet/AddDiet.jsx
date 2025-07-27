@@ -42,7 +42,7 @@ export default function AddDiet(){
            status:true,
            createdAt:Timestamp.now()
         }
-        await setDoc(doc(db,"admin",userId), data)
+        await setDoc(doc(db,"diet",userId), data)
         toast.success("diet added successfuly")
         setGoal("")
         setCuisine("")

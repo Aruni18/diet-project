@@ -21,7 +21,7 @@ export default function UpdateDiet(){
     },[])
 
     const fetchData=async()=>{
-       let dietDoc=await getDoc(doc(db, "admin", id))
+       let dietDoc=await getDoc(doc(db, "diet", id))
        let dietData=dietDoc.data()
        setGoal(dietData.goal)
        setCuisine(dietData.cuisine)
@@ -59,45 +59,17 @@ export default function UpdateDiet(){
            status:true,
            createdAt:Timestamp.now()
         }
-        await updateDoc(doc(db,"admin",id), data)
+        await updateDoc(doc(db,"diet",id), data)
         toast.success("diet updated successfuly")
         nav("/admin/Pages/manageDiet")
-        
-        // setGoal("")
-        // setCuisine("")
-        // setTitle("")
-        // setType("")
-        // setDescription("")
-        // setDuration("")
-        // setMinC("")
-        // setMaxC("")
+      
       }
       catch(err){
            toast.error(err.message)
       }
     }
      const nav=useNavigate()
-    // const getUserData=async(userId)=>{
-    //   let userDoc=await getDoc(doc(db, "users", userId))
-    //   let userData=userDoc.data()
-    //   sessionStorage.setItem("goal", userData?.goal)
-    //   sessionStorage.setItem("cuisine", userData?.cuisine)
-    //   sessionStorage.setItem("title", userData?.title)
-    //   sessionStorage.setItem("type", userData?.type)
-    //   sessionStorage.setItem("description", userData?.description)
-    //   sessionStorage.setItem("duration", userData?.duration)
-    //    sessionStorage.setItem("minC", userData?.minC)
-    //   sessionStorage.setItem("maxC", userData?.maxC)
-    //   sessionStorage.setItem("userId", userId)
-    //   sessionStorage.setItem("isLogin", true)
-    //   toast.success("Login successfully")
-    //   if(userData?.userType==1){
-    //     nav("/admin")
-    //   }
-    //   else{
-    //     nav("/")
-    //   }
-    // }
+    
     return(
       <>  
         <section
@@ -119,7 +91,7 @@ export default function UpdateDiet(){
                   Admin Panel<i className="ion-ios-arrow-forward" />
                 </span>
               </p>
-              <h1 className="mb-0 bread">Add Diet</h1>
+              <h1 className="mb-0 bread">Update Diet</h1>
             </div>
           </div>
         </div>
@@ -132,7 +104,7 @@ export default function UpdateDiet(){
             <div className="row no-gutters">
              
                 <div className="contact-wrap w-100 p-md-5 p-4">
-                  <h3 className="mb-4">Add your Diet</h3>
+                  <h3 className="mb-4">Update your Diet</h3>
                   <div id="form-message-warning" className="mb-4" />
                   {/* <div id="form-message-success" className="mb-4">
                     Your message was sent, thank you!
@@ -313,57 +285,7 @@ export default function UpdateDiet(){
                   </form>
                 </div>
              
-              {/* <div className="col-lg-4 col-md-5 d-flex align-items-stretch">
-                <div className="info-wrap bg-primary w-100 p-md-5 p-4">
-                  <h3>Let's get in touch</h3>
-                  <p className="mb-4">
-                    We're open for any suggestion or just to have a chat
-                  </p>
-                  <div className="dbox w-100 d-flex align-items-start">
-                    <div className="icon d-flex align-items-center justify-content-center">
-                      <span className="fa fa-map-marker" />
-                    </div>
-                    <div className="text pl-3">
-                      <p>
-                        <span>Address:</span> 198 West 21th Street, Suite 721
-                        New York NY 10016
-                      </p>
-                    </div>
-                  </div>
-                  <div className="dbox w-100 d-flex align-items-center">
-                    <div className="icon d-flex align-items-center justify-content-center">
-                      <span className="fa fa-phone" />
-                    </div>
-                    <div className="text pl-3">
-                      <p>
-                        <span>Phone:</span>{" "}
-                        <a href="tel://1234567920">+ 1235 2355 98</a>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="dbox w-100 d-flex align-items-center">
-                    <div className="icon d-flex align-items-center justify-content-center">
-                      <span className="fa fa-paper-plane" />
-                    </div>
-                    <div className="text pl-3">
-                      <p>
-                        <span>Email:</span>{" "}
-                        <a href="mailto:info@yoursite.com">info@yoursite.com</a>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="dbox w-100 d-flex align-items-center">
-                    <div className="icon d-flex align-items-center justify-content-center">
-                      <span className="fa fa-globe" />
-                    </div>
-                    <div className="text pl-3">
-                      <p>
-                        <span>Website</span> <a href="#">yoursite.com</a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+              
             </div>
           </div>
         </div>

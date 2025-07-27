@@ -1,3 +1,4 @@
+
 import { addDoc, collection,deleteDoc,doc, onSnapshot,query, Timestamp,where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../../firebase"
@@ -8,13 +9,13 @@ import { PacmanLoader } from "react-spinners"
 import { FaTrash, FaEdit } from "react-icons/fa"
 import axios from "axios"
 
-export default function ManageDiet(){
+export default function ManageDietDetails(){
 
     const [load, setLoad]=useState(true)
     const [AllDiet, setAllDiet]=useState([])
 
     const fetchData=()=>{
-      const q=query(collection(db, "diet"))
+      const q=query(collection(db, "dietDetails"))
         onSnapshot(q, (dietData)=>{
             setAllDiet(
                 dietData.docs.map((el)=>{
@@ -40,7 +41,7 @@ export default function ManageDiet(){
       }).then(async(result) => {
         if (result.isConfirmed) {
              //console.log(DietId)
-             await deleteDoc(doc(db, "diet", DietId))
+             await deleteDoc(doc(db, "dietDetails", DietId))
         
        .then(()=>{
              //toast.success("item is deleted")
@@ -77,7 +78,7 @@ export default function ManageDiet(){
                Admin Panel <i className="ion-ios-arrow-forward" />
             </span>
           </p>
-          <h1 className="mb-0 bread">Manage diet </h1>
+          <h1 className="mb-0 bread">Manage Diet Details</h1>
         </div>
       </div>
     </div>
@@ -91,23 +92,29 @@ export default function ManageDiet(){
         <div className="col-md-18" style={{boxShadow:"0px 0px 15px royalblue"}}>
 
              <div className="d-flex justify-content-end p-2">
-                 <Link to={"/admin/Pages/add"}  className="btn btn-outline-primary">Add Diet</Link>
+                 <Link to={"/admin/diet/DietDetails"}  className="btn btn-outline-primary">diet detail</Link>
              </div>
              
                 <div className="contact-wrap w-100 p-md-5 p-4">
-                  <h3 className="mb-4">Manage Diet</h3>
+                  <h3 className="mb-4">Manage Diet Details</h3>
                   <table className="table table-striped">
                       <thead>
                          <tr>
                            <th scope="col">#</th>
-                           <th scope="col">Goal</th>
-                           <th scope="col">Cuisine</th>
-                            <th scope="col">Title</th>
-                           <th scope="col">Diet Type</th>
-                           <th scope="col">Description</th>
-                           <th scope="col">Duration</th>
-                           <th scope="col">Min Calorie</th>
-                           <th scope="col">Max Calorie</th>
+                           <th scope="col">Diet</th>
+                           <th scope="col">Day</th>
+                            <th scope="col">Meal</th>
+                           <th scope="col">Time</th>
+                           <th scope="col">Protien</th>
+                           <th scope="col">Item</th>
+                           <th scope="col">carbon</th>
+                           <th scope="col">Quantity</th>
+                           <th scope="col">Fats</th>
+                           <th scope="col">Calorie</th>
+                           <th scope="col">Fibre</th>
+                           <th scope="col">Recipe</th>
+                           <th scope="col">Sugar</th>
+                           <th scope="col">Image</th>
                            <th scope="col">Actions</th>
                          </tr>
                       </thead>
@@ -118,22 +125,25 @@ export default function ManageDiet(){
                           return <tbody>
                                 <tr>
                                   <th scope="row">{index+1}</th>
-                                  <td>{el.goal}</td>
-                                  <td>{el.cuisine}</td>
-                                  <td>{el.title}</td>
-                                  <td>{el.type}</td>
-                                  <td>{el.description}</td>
-                                  <td>{el.duration}</td>
-                                  <td>{el.minC}</td>
-                                  <td>{el.maxC}</td>
-                                  {/* <td><img className="img-fluid" src={el.image} alt="" /></td> */}
+                                  <td>{el.diet}</td>
+                                  <td>{el.day}</td>
+                                  <td>{el.meal}</td>
+                                  <td>{el.time}</td>
+                                  <td>{el.protien}</td>
+                                  <td>{el.item}</td>
+                                  <td>{el.carbon}</td>
+                                  <td>{el.quantity}</td>
+                                  <td>{el.fats}</td>
+                                  <td>{el.calorie}</td>
+                                  <td>{el.fibre}</td>
+                                  <td>{el.recipe}</td>
+                                  <td>{el.sugar}</td>
+                                  <td><img className="img-fluid" src={el.image} alt="" 
+                                  style={{height:"50px", width:"50px"}}/></td>
 
                                   <td>
-                                    <Link to={"/admin/diet/edit/"+el.id }className="text-success mx-2" title="edit">
-                                    {/* <button className="btn btn-danger " onClick={()=>{
-                                    DeleteDiet(el.id)
-                                  }}>Delete</button> */}
-                                  <FaEdit style={{cursor:"pointer", fontSize:"1.2rem"}}/></Link>
+                                    <Link to={"/admin/diet/edit2/"+el.id }className="text-success mx-2" title="edit">
+                                      <FaEdit style={{cursor:"pointer", fontSize:"1.2rem"}}/></Link>
                                   <FaTrash 
                                      className="text-danger"
                                      style={{cursor:"pointer", fontSize:"1.2rem"}}

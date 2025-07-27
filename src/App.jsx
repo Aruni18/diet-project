@@ -16,7 +16,9 @@ import AdminLayout from "./Component/layouts/AdminLayout"
 import AddDiet from "./Component/admin/diet/AddDiet"
 import DietDetails from "./Component/admin/diet/DietDetails"
 import ManageDiet from "./Component/admin/diet/ManageDiet"
+import ManageDietDetails from "./Component/admin/diet/ManageDietDetails"
 import UpdateDiet from "./Component/admin/diet/UpdateDiet"
+import UpdateDietDetails from "./Component/admin/diet/UpdateDietDetails"
 import ManageUser from "./Component/admin/diet/user/ManageUser"
 import Dashboard from "./Component/admin/diet/pages/Dashboard"
 function App() {
@@ -42,9 +44,11 @@ function App() {
           <Route path="/admin" element={<AdminLayout/>} >
                <Route index element={<Dashboard/>}/>
                <Route path="Pages/add" element={<AddDiet/>} /> 
-               <Route path="Pages/DietDetails" element={<DietDetails/>} /> 
+               <Route path="Pages/DietDetails" element={<DietDetails/>} />
                <Route path="Pages/manageDiet" element={<ManageDiet/>} /> 
-               <Route path="Pages/edit/:id" element={<UpdateDiet/>} /> 
+               <Route path="diet/ManageDietDetails" element={<ManageDietDetails/>} />
+               <Route path="diet/edit/:id" element={<UpdateDiet/>} /> 
+               <Route path="diet/edit2/:id" element={<UpdateDietDetails/>} /> 
                <Route path="diet/user/ManageUser" element={<ManageUser/>} /> 
           </Route>
 

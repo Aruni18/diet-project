@@ -1,10 +1,12 @@
-import { addDoc, collection, Timestamp } from "firebase/firestore"
-import { useState } from "react"
-import { db } from "../../../firebase"
+import { addDoc, collection,doc,getDoc,Timestamp, updateDoc } from "firebase/firestore"
+import { useState, useEffect } from "react"
+import {db } from "../../../firebase"
 import { toast } from "react-toastify"
 import axios from "axios"
+import { useNavigate, Link, useParams } from "react-router-dom"
 
-export default function DietDetails(){
+export default function UpdateDietDetails(){
+    const {id}=useParams()
     const [diet, setDiet]=useState("")
     const [day, setDay]=useState("")
     const [meal, setMeal]=useState("")
@@ -20,306 +22,284 @@ export default function DietDetails(){
     const [sugar,setSugar]=useState("")
     const [image,setImage]=useState({})
     const [imageName, setImageName]=useState("")
+    const [previousImage, setPreviousImage]=useState("")
 
-    const handleForm=async (e)=>{
-        e.preventDefault()
-        const formData=new FormData()
-        formData.append("file", image)
-        formData.append("upload_preset", "dietPreset")
+    useEffect(()=>{
+      fetchData()
+    },[])
 
-        try{
+    const fetchData=async()=>{
+       let dietDoc=await getDoc(doc(db, "dietDetails", id))
+       let dietData=dietDoc.data()
+       setDiet(dietData.diet)
+       setDay(dietData.day)
+       setMeal(dietData.meal)
+       setTime(dietData.time)
+       setProtien(dietData.protien)
+       setItem(dietData.item)
+       setCarbon(dietData.carbon)
+       setQuantity(dietData.quantity)
+       setFats(dietData.fats)
+       setCalorie(dietData.calorie)
+       setFibre(dietData.fibre)
+       setRecipe(dietData.recipe)
+       setSugar(dietData.sugar)
+      //  setImage(dietData.image)
+      //  setImageName(dietData.imageName)
+       setPreviousImage(dietData.image)
+    
+    }
+    const handleForm=async(e)=>{
+      e.preventDefault()
+      if(!!imageName){
+            const formData= new FormData();
+            formData.append("file", image)
+            formData.append("upload_preset", "dietPreset")
+
+             try{
             const response=await axios.post(
               `https://api.cloudinary.com/v1_1/dkgovil3o/image/upload`,
                 formData
             )
             saveData(response.data.secure_url)
-
         }
         catch(error){
             toast.error("Error uploading image: ", error.message)
         }
+      }else{
+        saveData(previousImage)
+      }
     }
-
     const changeImage=(e)=>{
         setImageName(e.target.value)
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0])
     }
-
+    const nav=useNavigate()
     const saveData=async(imageUrl)=>{
-        try{
-            let data={
-            diet,day, 
-            meal, time, protien,item, carbon,quantity, fats,
-            calorie,fibre, recipe,sugar,
-            image:imageUrl,
-            status:true,
-            createdAt:Timestamp.now()
-          }
-
-            // console.log(data)
-            // addDoc(collection(db, "collectionName"), data)
-            await addDoc(collection(db, "dietDetails"), data)
-            toast.success("dietdetails added successfully")
-            setDiet("")
-            setDay("")
-            setMeal("")
-            setTime("")
-            setProtien("")
-            setItem("")
-            setCarbon("")
-            setQuantity("")
-            setFats("")
-            setCalorie("")
-            setFibre("")
-            setRecipe("")
-            setSugar("")
-            setImage({})
-            setImageName("")
-            // setUrl("")
+      try{
+        let data={
+           diet,day,meal,time,protien,item,
+           carbon,quantity,fats,calorie,fibre,recipe,sugar,
+           userType:1,
+           status:true,
+           createdAt:Timestamp.now()
         }
-        catch(err){
-            toast.error(err.message)
-        }
+        await updateDoc(doc(db,"dietDetails",id), data)
+        toast.success("dietDetails updated successfuly")
+        nav("/admin/diet/ManageDietDetails")
+      }
+      catch(err){
+           toast.error(err.message)
+      }
     }
-
+    
+    
     return(
-      <>
-  <section
-    className="hero-wrap hero-wrap-2"
-    style={{ backgroundImage: 'url("/assets/images/bg_2.jpg")' }}
-    data-stellar-background-ratio="0.5"
-  >
-    <div className="overlay" />
-    <div className="container">
-      <div className="row no-gutters slider-text align-items-end">
-        <div className="col-md-9 ftco-animate pb-5">
-          <p className="breadcrumbs mb-2">
-            <span className="mr-2">
-              <a href="index.html">
-                Home <i className="ion-ios-arrow-forward" />
-              </a>
-            </span>{" "}
-            <span>
-               Admin Panel <i className="ion-ios-arrow-forward" />
-            </span>
-          </p>
-          <h1 className="mb-0 bread"> diet details</h1>
+      <>  
+        <section
+        className="hero-wrap hero-wrap-2"
+        style={{ backgroundImage: 'url("/assets/images/bg_2.jpg")' }}
+        data-stellar-background-ratio="0.5"
+        >
+        <div className="overlay" />
+        <div className="container">
+          <div className="row no-gutters slider-text align-items-end">
+            <div className="col-md-9 ftco-animate pb-5">
+              <p className="breadcrumbs mb-2">
+                <span className="mr-2">
+                  <a href="index.html">
+                    Home <i className="ion-ios-arrow-forward" />
+                  </a>
+                </span>{" "}
+                <span>
+                  Admin Panel<i className="ion-ios-arrow-forward" />
+                </span>
+              </p>
+              <h1 className="mb-0 bread">Update Diet Details</h1>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-   </section>
-   <section className="ftco-section bg-light">
-    <div className="container">
+  </section>
+  <section className="ftco-section bg-light">
+       <div className="container"> 
       <div className="row justify-content-center">
-        <div className="col-md-10" style={{boxShadow:"0px 0px 15px blue"}}>
+        <div className="col-md-12" style={{boxShadow:"0px 0px 15px blue"}}>
           <div className="wrapper">
             <div className="row no-gutters">
              
                 <div className="contact-wrap w-100 p-md-5 p-4">
-                  <h3 className="mb-4">Add Diet Details</h3>
+                  <h3 className="mb-4">Update Diet Details </h3>
                   <div id="form-message-warning" className="mb-4" />
-                  
+                    <img src={previousImage} style={{height:"100px", width:"100px"}} className="d-block mx-auto rounded-circle" 
+                  alt="" />
                   <form
                     method="POST"
                     id="contactForm"
                     name="contactForm"
                     className="contactForm"
                     onSubmit={handleForm}
-                    >
+                  >
                     <div className="row">
+
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label className="label" htmlFor="cuisine">
+                            diet
+                          </label>
+                         <select 
+                            className="form-control"
+                            value={diet}
+                            onChange={(e)=>{
+                              setDiet(e.target.value)
+                            }}
+                            >
+                                 <option disabled selected value={""}>-- Choose one --</option>
+                                 <option>Indian Cuisine</option>
+                                 <option>Mediterranean Cuisine</option>
+                                 <option>Keto Diet Cuisine</option>
+                                 <option>Mexican Cuisine</option>
+                                 <option>Vegan/Plant-Based Cuisine</option>
+                         </select>
+                        </div>
+                      </div>
+
                       <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="name">
-                            Diet
-                          </label>
-                          <select 
-                          className="form-control"
-                           value={diet}
-                            onChange={(e)=>{
-                                setDiet(e.target.value)
-                            }}>
-                            <option disabled value={""}>--choose one--</option>
-                            <option> type 1</option>
-                             <option> type 2</option>
-                          </select>
-                        </div>
-                      </div>
-                     <div className="col-md-6 ">
-                        <div className="form-group">
-                          <label className="label" htmlFor="email">
-                            Day
+                            day
                           </label>
                           <input
                             type="text"
                             className="form-control"
                             name="day"
                             id="day"
-                            placeholder="enter day"
-                             value={day}
+                            placeholder="Enter your goal"
+                            value={day}
                             onChange={(e)=>{
-                                setDay(e.target.value)
+                              setDay(e.target.value)
                             }}
                           />
                         </div>
-                      </div> 
+                      </div>
 
                       <div className="col-md-6">
-                        <div className="form-group" >
-                          <label className="label" htmlFor="subject">
-                            Meal
-                          </label> 
-                          
-                      <div className="row">
-                          <div className="col-md-2">
-                          <input
-                            type="radio"
-                            className="form-check-form-check-inline"
-                            name="meal"
-                            id="meal"
-                            value={meal}
-                            onChange={(e)=>{
-                                setMeal(e.target.value)
-                            }}
-                        />Lunch {" "}
-                         </div> 
-
-                        <div className="col-md-2">
-                         <input
-                            type="radio"
-                            className="form-check-form-check-inline"
-                            name="meal"
-                            id="meal"
-                            value={meal}
-                            onChange={(e)=>{
-                                setMeal(e.target.value)
-                            }}
-                        /> Breakfast {" "}
-                        </div> 
-                        <div className="col-md-2">
-                         <input
-                            type="radio"
-                            className="form-check-form-check-inline"
-                            name="meal"
-                            id="meal"
-                            value={meal}
-                            onChange={(e)=>{
-                                setMeal(e.target.value)
-                            }}
-                        />Dinner {" "}</div> 
-
-                        <div className="col-md-2">
-                         <input
-                            type="radio"
-                            className="form-check-form-check-inline"
-                            name="meal"
-                            id="meal"
-                            value={meal}
-                            onChange={(e)=>{
-                                setMeal(e.target.value)
-                            }}
-                        /> Snacks </div>
-                        
-                         </div>
-
-                        </div>
-                      </div>
-
-                       <div className="col-md-6">
                         <div className="form-group">
-                          <label className="label" htmlFor="protien">
-                            Time
-                          </label>
-                          <input
-                            type="time"
-                            className="form-control"
-                            name="protien"
-                            id="protien"
-                            placeholder="Enter Protien"
-                             value={time}
-                            onChange={(e)=>{
-                                setTime(e.target.value)
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="label" htmlFor="protien">
-                            Protien
+                          <label className="label" htmlFor="title">
+                            meal
                           </label>
                           <input
                             type="text"
                             className="form-control"
-                            name="protien"
-                            id="protien"
-                            placeholder="Enter Protien"
-                             value={protien}
+                            name="title"
+                            id="title"
+                            placeholder="Eter Title"
+                            value={meal}
                             onChange={(e)=>{
-                                setProtien(e.target.value)
+                              setMeal(e.target.value)
                             }}
                           />
                         </div>
                       </div>
 
+                    
                         <div className="col-md-6">
                         <div className="form-group">
-                          <label className="label" htmlFor="item">
+                          <label className="label" htmlFor="duration">
+                             Time
+                          </label>
+                           <input
+                            type="text"
+                            className="form-control"
+                            name="protien"
+                            id="protien"
+                            placeholder="Enter protien"
+                             value={time}
+                            onChange={(e)=>{
+                              setTime(e.target.value)
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label className="label" htmlFor="duration">
+                             Protien
+                          </label>
+                           <input
+                            type="text"
+                            className="form-control"
+                            name="protien"
+                            id="protien"
+                            placeholder="Enter protien"
+                             value={protien}
+                            onChange={(e)=>{
+                              setProtien(e.target.value)
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label className="label" htmlFor="mCalorie">
                             item
                           </label>
-                          <input
+                           <input
                             type="text"
                             className="form-control"
                             name="item"
                             id="item"
-                            placeholder="Enter Item"
+                            placeholder="Enter items"
                              value={item}
                             onChange={(e)=>{
-                                setItem(e.target.value)
+                              setItem(e.target.value)
                             }}
                           />
                         </div>
                       </div>
 
-                        <div className="col-md-6">
+                      <div className="col-md-6">
                         <div className="form-group">
-                          <label className="label" htmlFor="carbon">
-                            Carbon
+                          <label className="label" htmlFor="max">
+                             carbon
                           </label>
-                          <input
+                           <input
                             type="text"
                             className="form-control"
                             name="carbon"
                             id="carbon"
                             placeholder="Enter carbon"
-                             value={carbon}
+                            value={carbon}
                             onChange={(e)=>{
-                                setCarbon(e.target.value)
+                              setCarbon(e.target.value)
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                    
+
+                    <div className="col-md-6">
+                        <div className="form-group">
+                          <label className="label" htmlFor="max">
+                             quantity
+                           </label>
+                           <input
+                            type="text"
+                            className="form-control"
+                            name="quantity"
+                            id="quantity"
+                            placeholder="Enter quantity"
+                            value={quantity}
+                            onChange={(e)=>{
+                              setQuantity(e.target.value)
                             }}
                           />
                         </div>
                       </div>
 
                         <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="label" htmlFor="quantity">
-                           quantity
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            name="quantity"
-                            id="quantity"
-                            placeholder="Enter Quantity"
-                             value={quantity}
-                            onChange={(e)=>{
-                                setQuantity(e.target.value)
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="fat">
                            Fat
@@ -430,7 +410,6 @@ export default function DietDetails(){
                           />
                         </div>
                       </div>
-
                       <div className="col-md-12">
                         <div className="form-group">
                           <input
@@ -441,17 +420,17 @@ export default function DietDetails(){
                         </div>
                       </div>
                     </div>
-                  </form >
-                  
+                  </form>
                 </div>
-              
-              
+             
+            
             </div>
           </div>
         </div>
-       </div>
+        
+      </div>
     </div>
-   </section>
+  </section>
         </>
     )
 }
