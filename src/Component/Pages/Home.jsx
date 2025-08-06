@@ -2,7 +2,7 @@ export default function Home(){
     return(
         <>
  
-  <div className="hero-wrap js-fullheight">
+  {/* <div className="hero-wrap js-fullheight mt-2">
     <div className="home-slider owl-carousel js-fullheight">
       <div
         className="slider-item js-fullheight"
@@ -83,31 +83,13 @@ export default function Home(){
         </div>
       </div>
     </div>
-  </div>
-  
-  <section className="ftco-section ftco-services">
+  </div>  */}
+
+  <br /><br /><br /><br />
+  <section className="ftco-section ftco-services mt-4">
     <div className="container">
       <div className="row">
-        <div className="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
-          <div className="d-block services-wrap text-center">
-            <div
-              className="img"
-              style={{ backgroundImage: "url(assets/images/services-1.jpg)" }}
-            />
-            <div className="media-body p-2 mt-3">
-              <h3 className="heading">Exercise Program</h3>
-              <p>
-                Even the all-powerful Pointing has no control about the blind
-                texts it is an almost unorthographic.
-              </p>
-              <p>
-                <a href="#" className="btn btn-primary btn-outline-primary">
-                  Read more
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
+
         <div className="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
           <div className="d-block services-wrap text-center">
             <div
@@ -115,7 +97,7 @@ export default function Home(){
               style={{ backgroundImage: "url(assets/images/services-2.jpg)" }}
             />
             <div className="media-body p-2 mt-3">
-              <h3 className="heading">Nutrition Plans</h3>
+              <h3 className="heading"> Add Diet</h3>
               <p>
                 Even the all-powerful Pointing has no control about the blind
                 texts it is an almost unorthographic.
@@ -128,6 +110,7 @@ export default function Home(){
             </div>
           </div>
         </div>
+
         <div className="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
           <div className="d-block services-wrap text-center">
             <div
@@ -135,7 +118,28 @@ export default function Home(){
               style={{ backgroundImage: "url(assets/images/services-3.jpg)" }}
             />
             <div className="media-body p-2 mt-3">
-              <h3 className="heading">Diet Program</h3>
+              <h3 className="heading">Diet Details</h3>
+              <p>
+                Even the all-powerful Pointing has no control about the blind
+                texts it is an almost unorthographic.
+              </p>
+              <p>
+                <a href="#" className="btn btn-primary btn-outline-primary">
+                  Read more
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+       <div className="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
+          <div className="d-block services-wrap text-center ">
+            <div
+              className="img"
+              style={{ backgroundImage: "url(assets/images/payment.jpg)" }}
+            />
+            <div className="media-body p-2 mt-3">
+              <h3 className="heading">Payment</h3>
               <p>
                 Even the all-powerful Pointing has no control about the blind
                 texts it is an almost unorthographic.

@@ -1,9 +1,10 @@
 //import { createUserWithEmailAndPassword } from "firebase/auth"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { db } from "../../../firebase"
 import {doc, getDoc,setDoc, Timestamp } from "firebase/firestore"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { MoonLoader } from "react-spinners"
 
 export default function AddDiet(){
     const [goal,setGoal]=useState("")
@@ -14,6 +15,8 @@ export default function AddDiet(){
     const [duration, setDuration]=useState("")
     const [minC, setMinC]=useState("")
     const [maxC, setMaxC]=useState("")
+    const [price,setPrice]=useState("")
+    const [load,setLoad]=useState(true)
 
     const handleForm=async(e)=>{
       e.preventDefault()
@@ -38,12 +41,14 @@ export default function AddDiet(){
            duration,
            minC,
            maxC,
+           price,
            userType:1,
            status:true,
            createdAt:Timestamp.now()
         }
         await setDoc(doc(db,"diet",userId), data)
         toast.success("diet added successfuly")
+        
         setGoal("")
         setCuisine("")
         setTitle("")
@@ -52,6 +57,8 @@ export default function AddDiet(){
         setDuration("")
         setMinC("")
         setMaxC("")
+        setPrice("")
+        
       }
       catch(err){
            toast.error(err.message)
@@ -67,10 +74,12 @@ export default function AddDiet(){
       sessionStorage.setItem("type", userData?.type)
       sessionStorage.setItem("description", userData?.description)
       sessionStorage.setItem("duration", userData?.duration)
-       sessionStorage.setItem("minC", userData?.minC)
+      sessionStorage.setItem("minC", userData?.minC)
       sessionStorage.setItem("maxC", userData?.maxC)
+      sessionStorage.setItem("Price", userData?.price)
       sessionStorage.setItem("userId", userId)
       sessionStorage.setItem("isLogin", true)
+
       toast.success("Login successfully")
       if(userData?.userType==1){
         nav("/admin")
@@ -79,6 +88,9 @@ export default function AddDiet(){
         nav("/")
       }
     }
+    useEffect(()=>{
+      setLoad(false)
+    })
     return(
       <>  
         <section
@@ -118,6 +130,10 @@ export default function AddDiet(){
                   {/* <div id="form-message-success" className="mb-4">
                     Your message was sent, thank you!
                   </div> */}
+
+                   {load? 
+     <MoonLoader color="#0058bdff" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
+    :
                   <form
                     method="POST"
                     id="contactForm"
@@ -131,7 +147,7 @@ export default function AddDiet(){
                           <label className="label" htmlFor="name">
                             Goal
                           </label>
-                          <input
+                          <select
                             type="text"
                             className="form-control"
                             name="goal"
@@ -141,7 +157,14 @@ export default function AddDiet(){
                             onChange={(e)=>{
                               setGoal(e.target.value)
                             }}
-                          />
+                        >
+                            <option value={""} disabled selected >-- Choose one --</option>
+                            <option value="balanced">Maintain a healthy weight and get all essential nutrients</option>
+                            <option value="veg">Adopt a plant-based lifestyle while meeting protein and vitamin needs</option>
+                            <option value="keto">Burn fat through ketosis for effective weight loss</option>
+                            <option value="lowCarb">Control blood sugar and reduce belly fat by minimizing carbs</option>
+                            <option value="lowFat">Lower cholesterol and improve heart health by reducing fat intake.</option>
+                          </select>
                         </div>
                       </div>
                       <div className="col-md-6">
@@ -281,6 +304,25 @@ export default function AddDiet(){
                         </div>
                       </div>
 
+                       {/* <div className="col-md-6">
+                        <div className="form-group">
+                          <label className="label" htmlFor="max">
+                             Price
+                          </label>
+                           <input
+                            type="number"
+                            className="form-control"
+                            name="max"
+                            id="max"
+                            placeholder="Enter Max Calorie"
+                            value={price}
+                            onChange={(e)=>{
+                              setPrice(e.target.value)
+                            }}
+                          />
+                        </div>
+                      </div> */}
+
                       <div className="col-md-12">
                         <div className="form-group">
                           <input
@@ -291,7 +333,7 @@ export default function AddDiet(){
                         </div>
                       </div>
                     </div>
-                  </form>
+                  </form> }
                 </div>
              
               {/* <div className="col-lg-4 col-md-5 d-flex align-items-stretch">

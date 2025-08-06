@@ -1,7 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 import {toast} from "react-toastify"
 import Swal from "sweetalert2";
 export default function Header(){
+    const {pathname}=useLocation()
     let isLogin=sessionStorage.getItem("isLogin")
     let name=sessionStorage.getItem("name")
     const nav=useNavigate()
@@ -10,7 +11,7 @@ export default function Header(){
               const swalWithBootstrapButtons = Swal.mixin({
               customClass: {
               confirmButton: "btn btn-success",
-              cancelButton: "btn btn-danger"
+              cancelButton: "btn btn-danger mr-2"
               },
               buttonsStyling: false
             });
@@ -124,42 +125,42 @@ export default function Header(){
       </button>
       <div className="collapse navbar-collapse" id="ftco-nav">
         <ul className="navbar-nav ml-auto">
-          <li  >
+          <li  className={`nav-item ${pathname=="/" && "active"}`} >
             <Link to="/" className="nav-link">
               Home
             </Link>
-          </li>
-          <li className="nav-item">
+          </li >
+          <li className={`nav-item ${pathname=="/about" && "active"}`}>
             <Link to="about" className="nav-link">
               About
             </Link>
           </li>
-          <li className="nav-item">
+          <li  className={`nav-item ${pathname=="/coach" && "active"}`}>
             <Link to="coach" className="nav-link">
               Coach
             </Link>
           </li>
-          <li className="nav-item">
+          <li  className={`nav-item ${pathname=="/pricing" && "active"}`}>
             <Link to="pricing" className="nav-link">
               Pricing
             </Link>
           </li>
-          <li className="nav-item">
+          <li  className={`nav-item ${pathname=="/service" && "active"}`}>
             <Link to="service" className="nav-link">
               Services
             </Link>
           </li>
-          <li className="nav-item">
+          <li  className={`nav-item ${pathname=="/stories" && "active"}`}>
             <Link  to="stories" className="nav-link">
               Stories
             </Link>
           </li>
-          <li className="nav-item">
+          <li  className={`nav-item ${pathname=="/blog" && "active"}`}>
             <Link to="blog" className="nav-link">
               Blog
             </Link>
           </li>
-          <li className="nav-item">
+          <li  className={`nav-item ${pathname=="/contact" && "active"}`}>
             <Link to="contact" className="nav-link">
               Contact
             </Link>
@@ -172,7 +173,7 @@ export default function Header(){
             </Link>
           </li>
            :
-           <li className="nav-item">
+           <li  className={`nav-item ${pathname=="/login" && "active"}`}>
             <Link to={"/login"} className="nav-link">
               Login
             </Link>

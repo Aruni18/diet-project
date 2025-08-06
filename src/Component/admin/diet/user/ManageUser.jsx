@@ -1,14 +1,20 @@
 import { collection,doc,updateDoc, onSnapshot,query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../../../firebase"
-import { PacmanLoader } from "react-spinners"
+import { MoonLoader } from "react-spinners"
 import Swal from "sweetalert2"
 import Switch from "react-switch"
+import ResponsivePagination from 'react-responsive-pagination'
+import 'react-responsive-pagination/themes/classic-light-dark.css';
+
 
 export default function ManageUser(){
 
     const [load, setLoad]=useState(false)
     const [users, setUsers]=useState([])
+    const [currentPage, setCurrentPage]=useState(1)
+    const [totalPages, setTotalPages]=useState(1)
+    const limit=5
 
     useEffect(()=>{
         fetchData()
@@ -20,7 +26,7 @@ export default function ManageUser(){
             setUsers(userCol.docs.map((el)=>{
                     return{id:el.id,...el.data()}
                 }))
-                
+                setTotalPages(Math.ceil(userCol.docs.length/limit))
         })}
 
         const changeStatus=(userId,status)=>{
@@ -45,7 +51,7 @@ export default function ManageUser(){
                   icon: "success"
                 });
               }).catch((error)=>{
-                  toast.error
+                  toast.error(error.message)
               })
             }
             });
@@ -80,7 +86,7 @@ export default function ManageUser(){
   {/* <section className="ftco-section bg-light"> */}
     <div className="container my-5" >
     {load? 
-     <PacmanLoader color="#00BD56" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
+     <MoonLoader color="#0058bdff" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
     :
       <div className="row justify-content-center">
         <div className="col-md-18" style={{boxShadow:"0px 0px 15px royalblue"}}>
@@ -100,16 +106,15 @@ export default function ManageUser(){
                            <th scope="col">Gender</th>
                            <th scope="col">Status</th>
                            <th scope="col">Action</th>
-                          
                          </tr>
                       </thead>
 
                      <tbody> 
                       {
-                        users?.map((el,index)=>{
+                        users?.slice((currentPage-1)*limit,((currentPage-1)*limit)+limit)?.map((el,index)=>{
                           return(
                                 <tr>
-                                  <th>{index+1}</th>
+                                  <td>{index+1}</td>
                                   <td>{el?.name}</td>
                                   <td>{el?.email}</td>
                                   <td>{el?.password}</td>
@@ -117,8 +122,6 @@ export default function ManageUser(){
                                   <td>{el?.goal}</td>
                                   <td>{el?.age}</td>
                                   <td>{el?.gender}</td>
-                                  
-                                  {/* <td><img className="img-fluid" src={el.image} alt="" /></td> */}
                                   <td>
                                     {el?.status?"Active":"In-active"}
                                   </td>
@@ -128,9 +131,19 @@ export default function ManageUser(){
                                     }} />
                                   </td>
                                 </tr>)
-                      })
-    }
+                      })}
                       </tbody>
+                      <tfoot>
+                            <tr>
+                                <td colSpan={12}>
+                                     <ResponsivePagination
+                                        current={currentPage}
+                                        total={totalPages}
+                                        onPageChange={setCurrentPage}
+                                        />
+                                </td>
+                            </tr>
+                        </tfoot>
                   </table>
       
                 </div>

@@ -124,7 +124,7 @@ export default function Login(){
                     onSubmit={handleForm}
                   >
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-12">
                         <div className="form-group">
                           <label className="label" htmlFor="name">
                             Email Address
@@ -149,7 +149,7 @@ export default function Login(){
                             Password
                           </label>
                           <input
-                            type="text"
+                            type="password"
                             className="form-control"
                             name="subject"
                             id="subject"

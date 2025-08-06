@@ -43,8 +43,10 @@ export default function Coach(){
               <span className="position mb-2">Health Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                 My goal is to help you build sustainable habits that support both your 
+                 physical and mental health. With personalized diet planning, exercise 
+                 routines, and wellness tips, I’m here to guide your transformation one 
+                 step at a time.
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -97,8 +99,9 @@ export default function Coach(){
               <span className="position mb-2">Life &amp; Business Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                  Balancing personal health and professional success isn’t easy, but it’s 
+                  possible. I work with clients to create harmony between life, work, and 
+                  wellness through focused coaching and achievable lifestyle changes
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -151,8 +154,9 @@ export default function Coach(){
               <span className="position mb-2">Executive Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                  I specialize in helping professionals stay healthy in high-pressure 
+                  environments. From time-efficient fitness strategies to nutritional 
+                  planning for busy schedules. I design solutions that work around you.
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -205,8 +209,9 @@ export default function Coach(){
               <span className="position mb-2">Health Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                  Healthy living is not a challenge, it’s a mindset. I provide tailored diet and 
+                  fitness solutions that suit your body type, lifestyle, and health goals — making 
+                  nutrition feel simple and effective.
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -259,8 +264,9 @@ export default function Coach(){
               <span className="position mb-2">Executive Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                  With years of experience coaching high-performing individuals, I help clients 
+                  develop peak performance routines through diet optimization, stress management, 
+                  and mental clarity strategies
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -313,8 +319,9 @@ export default function Coach(){
               <span className="position mb-2">Health Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                  Helping people feel confident in their bodies is my passion. I focus on 
+                  mindful nutrition and practical fitness plans that make staying healthy 
+                  enjoyable and achievable for every lifestyle.
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -367,8 +374,9 @@ export default function Coach(){
               <span className="position mb-2">Health Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                  I believe every goal starts with a strong foundation. I guide my clients 
+                  in building healthy eating patterns and active routines that support both 
+                  short-term goals and long-term wellness.
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">
@@ -421,8 +429,8 @@ export default function Coach(){
               <span className="position mb-2">Executive Coach</span>
               <div className="faded">
                 <p>
-                  I am an ambitious workaholic, but apart from that, pretty
-                  simple person.
+                 Success starts with self-discipline. I coach professionals to optimize their 
+                 performance through mental clarity, structured routines, and energy-focused nutrition strategies.
                 </p>
                 <ul className="ftco-social text-center">
                   <li className="ftco-animate">

@@ -113,6 +113,7 @@ export default function Register(){
                     name="contactForm"
                     className="contactForm"
                     onSubmit={handleForm}
+                    
                   >
                     <div className="row">
                       <div className="col-md-12">
@@ -234,10 +235,10 @@ export default function Register(){
                           <label className="label" htmlFor="email">
                            Gender
                           </label>
-                        <div>
+                        <div style={{marginLeft:"20px"}}> 
                           <input
                             type="radio"
-                            className="form-check-input"
+                            className="form-check-input mr-2"
                             name="gender"
                             id="gender"
                             value={"Male"}
@@ -245,9 +246,9 @@ export default function Register(){
                             onChange={(e)=>{
                                 setGender(e.target.value)
                             }}
-                          />{" "} Male
+                          /> Male
                         </div>          
-                        <div>        
+                        <div style={{marginLeft:"20px"}}>        
                           <input
                             type="radio"
                             className="form-check-input"
@@ -261,7 +262,7 @@ export default function Register(){
                           /> Female
                         </div>
 
-                        <div>
+                        <div style={{marginLeft:"20px"}}>
                           <input
                             type="radio"
                             className="form-check-input"

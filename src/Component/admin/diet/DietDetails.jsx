@@ -11,7 +11,7 @@ export default function DietDetails(){
     const [time, setTime]=useState("")
     const [protien, setProtien]=useState("")
     const [item,setItem]=useState("")
-    const [carbon, setCarbon]=useState("")
+    const [corbs, setCorbs]=useState("")
     const [quantity,setQuantity]=useState("")
     const [fats,setFats]=useState("")
     const [calorie, setCalorie]=useState("")
@@ -49,7 +49,7 @@ export default function DietDetails(){
         try{
             let data={
             diet,day, 
-            meal, time, protien,item, carbon,quantity, fats,
+            meal, time, protien,item, corbs,quantity, fats,
             calorie,fibre, recipe,sugar,
             image:imageUrl,
             status:true,
@@ -66,7 +66,7 @@ export default function DietDetails(){
             setTime("")
             setProtien("")
             setItem("")
-            setCarbon("")
+            setCorbs("")
             setQuantity("")
             setFats("")
             setCalorie("")
@@ -85,13 +85,13 @@ export default function DietDetails(){
     return(
       <>
   <section
-    className="hero-wrap hero-wrap-2"
+    className="hero-wrap hero-wrap-2 "
     style={{ backgroundImage: 'url("/assets/images/bg_2.jpg")' }}
-    data-stellar-background-ratio="0.5"
+    data-stellar-background-ratio="0.5 "
   >
-    <div className="overlay" />
-    <div className="container">
-      <div className="row no-gutters slider-text align-items-end">
+    <div className="overlay " />
+    <div className="container ">
+      <div className="row no-gutters slider-text align-items-end ">
         <div className="col-md-9 ftco-animate pb-5">
           <p className="breadcrumbs mb-2">
             <span className="mr-2">
@@ -138,9 +138,12 @@ export default function DietDetails(){
                             onChange={(e)=>{
                                 setDiet(e.target.value)
                             }}>
-                            <option disabled value={""}>--choose one--</option>
-                            <option> type 1</option>
-                             <option> type 2</option>
+                            <option disabled selected value={""}>-- Choose one --</option>
+                            <option>Balanced Diet</option>
+                            <option>Vegetarian Diet</option>
+                            <option>Keto Diet</option>
+                            <option>Low-Carb Diet</option>
+                            <option>Low Fat Diet</option>
                           </select>
                         </div>
                       </div>
@@ -163,57 +166,61 @@ export default function DietDetails(){
                         </div>
                       </div> 
 
-                      <div className="col-md-6">
+                      <div className="col-md-6"> 
                         <div className="form-group" >
                           <label className="label" htmlFor="subject">
                             Meal
-                          </label> 
+                          </label>  
                           
                       <div className="row">
-                          <div className="col-md-2">
-                          <input
+                          <div style={{marginLeft:"40px"}}> 
+                          <input  
                             type="radio"
-                            className="form-check-form-check-inline"
+                            className="form-check-input "
                             name="meal"
                             id="meal"
-                            value={meal}
+                            value={"Lunch"}
+                            checked={meal=="Lunch"}
                             onChange={(e)=>{
                                 setMeal(e.target.value)
                             }}
-                        />Lunch {" "}
+                        />Lunch
                          </div> 
 
-                        <div className="col-md-2">
+                        <div style={{marginLeft:"40px"}}>
                          <input
                             type="radio"
-                            className="form-check-form-check-inline"
+                            className="form-check-input"
                             name="meal"
                             id="meal"
-                            value={meal}
+                            value={"Breakfast"}
+                            checked={meal=="Breakfast"}
                             onChange={(e)=>{
                                 setMeal(e.target.value)
                             }}
-                        /> Breakfast {" "}
+                        /> Breakfast 
                         </div> 
-                        <div className="col-md-2">
+                        <div style={{marginLeft:"40px"}}>
                          <input
                             type="radio"
-                            className="form-check-form-check-inline"
+                            className="form-check-input d-flex align-items-center"
                             name="meal"
                             id="meal"
-                            value={meal}
+                            value={"Dinner"}
+                            checked={meal=="Dinner"}
                             onChange={(e)=>{
                                 setMeal(e.target.value)
                             }}
-                        />Dinner {" "}</div> 
+                        />Dinner </div> 
 
-                        <div className="col-md-2">
+                        <div style={{marginLeft:"40px"}}>
                          <input
                             type="radio"
-                            className="form-check-form-check-inline"
+                            className="form-check-input"
                             name="meal"
                             id="meal"
-                            value={meal}
+                            value={"Snacks"}
+                            checked={meal=="Snacks"}
                             onChange={(e)=>{
                                 setMeal(e.target.value)
                             }}
@@ -222,7 +229,9 @@ export default function DietDetails(){
                          </div>
 
                         </div>
-                      </div>
+                      
+                     
+                   </div>
 
                        <div className="col-md-6">
                         <div className="form-group">
@@ -283,18 +292,18 @@ export default function DietDetails(){
 
                         <div className="col-md-6">
                         <div className="form-group">
-                          <label className="label" htmlFor="carbon">
-                            Carbon
+                          <label className="label" htmlFor="corbs">
+                            Corbs
                           </label>
                           <input
                             type="text"
                             className="form-control"
-                            name="carbon"
-                            id="carbon"
-                            placeholder="Enter carbon"
-                             value={carbon}
+                            name="corbs"
+                            id="corbs"
+                            placeholder="Enter orbs"
+                             value={corbs}
                             onChange={(e)=>{
-                                setCarbon(e.target.value)
+                                setCorbs(e.target.value)
                             }}
                           />
                         </div>

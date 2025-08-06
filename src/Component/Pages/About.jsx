@@ -50,10 +50,10 @@ export default function About(){
                manage your weight, improve your energy levels, or simply adopt a healthier 
                lifestyle, our dedicated coaches are here to guide you every step of the way.
             </p>
-            <p>
-              A small river named Duden flows by their place and supplies it
-              with the necessary regelialia. It is a paradisematic country, in
-              which roasted parts of sentences fly into your mouth.
+            <p>  
+              Our platform is developed and maintained by a passionate team of health 
+              enthusiasts, developers, and diet experts, committed to delivering accurate, 
+              engaging, and helpful tools for your health journey.
             </p>
             <div className="founder d-flex align-items-center mt-5">
               <div
@@ -70,7 +70,8 @@ export default function About(){
       </div>
     </div>
   </section>
-  <section className="ftco-section ftco-no-pt ftco-no-pb">
+
+  {/* <section className="ftco-section ftco-no-pt ftco-no-pb">
     <div className="container-fluid px-md-0">
       <div className="row no-gutters">
         <div className="col-md-3 d-flex align-items-stretch">
@@ -175,8 +176,8 @@ export default function About(){
         </div>
       </div>
     </div>
-  </section>
-  <section className="ftco-section testimony-section bg-light">
+  </section> 
+ <section className="ftco-section testimony-section bg-light">
     <div className="container">
       <div className="row justify-content-center pb-5 mb-3">
         <div className="col-md-7 heading-section text-center ftco-animate">
@@ -371,7 +372,7 @@ export default function About(){
         </div>
       </div>
     </div>
-  </section>
+  </section> */}
  
 </>
 

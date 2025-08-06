@@ -1,26 +1,34 @@
-import { addDoc, collection,deleteDoc,doc, onSnapshot,query, Timestamp,where } from "firebase/firestore"
+import { addDoc, collection,deleteDoc,doc,getDoc, onSnapshot,query, Timestamp,where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../../firebase"
 import { toast } from "react-toastify"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
-import { PacmanLoader } from "react-spinners"
+import { MoonLoader } from "react-spinners"
 import { FaTrash, FaEdit } from "react-icons/fa"
 import axios from "axios"
+import ResponsivePagination from 'react-responsive-pagination'
+import 'react-responsive-pagination/themes/classic-light-dark.css';
+
 
 export default function ManageDiet(){
 
     const [load, setLoad]=useState(true)
     const [AllDiet, setAllDiet]=useState([])
+    const [currentPage, setCurrentPage]=useState(1)
+    const [totalPages, setTotalPages]=useState(1)
+    const limit=2
 
     const fetchData=()=>{
       const q=query(collection(db, "diet"))
-        onSnapshot(q, (dietData)=>{
+        onSnapshot(q,(userCol)=>{
             setAllDiet(
-                dietData.docs.map((el)=>{
+                userCol.docs.map((el)=>{
                     return{id:el.id,...el.data()}
                 }))
                 setLoad(false)
+                setTotalPages(Math.ceil(userCol.docs.length/limit))
+                // setLoad(false)
         })}
 
     useEffect(()=>{
@@ -85,7 +93,7 @@ export default function ManageDiet(){
   {/* <section className="ftco-section bg-light"> */}
     <div className="container my-5" >
     {load? 
-     <PacmanLoader color="#00BD56" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
+     <MoonLoader color="#0058bdff" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
     :
       <div className="row justify-content-center">
         <div className="col-md-18" style={{boxShadow:"0px 0px 15px royalblue"}}>
@@ -96,8 +104,8 @@ export default function ManageDiet(){
              
                 <div className="contact-wrap w-100 p-md-5 p-4">
                   <h3 className="mb-4">Manage Diet</h3>
-                  <table className="table table-striped">
-                      <thead>
+                  <table className="table table-bordered table-hover table-striped">
+                      <thead className="table-primary">
                          <tr>
                            <th scope="col">#</th>
                            <th scope="col">Goal</th>
@@ -111,13 +119,12 @@ export default function ManageDiet(){
                            <th scope="col">Actions</th>
                          </tr>
                       </thead>
-
-
+               <tbody>
                       {
-                        AllDiet.map((el,index)=>{
-                          return <tbody>
-                                <tr>
-                                  <th scope="row">{index+1}</th>
+                        AllDiet?.slice((currentPage-1)*limit,currentPage*limit)?.map((el,index)=>{
+                          return(
+                                <tr key={el.id}>
+                                  <th scope="row">{(currentPage-1)*limit+ index+1}</th>
                                   <td>{el.goal}</td>
                                   <td>{el.cuisine}</td>
                                   <td>{el.title}</td>
@@ -129,23 +136,33 @@ export default function ManageDiet(){
                                   {/* <td><img className="img-fluid" src={el.image} alt="" /></td> */}
 
                                   <td>
-                                    <Link to={"/admin/diet/edit/"+el.id }className="text-success mx-2" title="edit">
+                                    <Link to={"/admin/diet/edit/"+el.id }className="text-warning mx-2" title="edit">
                                     {/* <button className="btn btn-danger " onClick={()=>{
                                     DeleteDiet(el.id)
                                   }}>Delete</button> */}
                                   <FaEdit style={{cursor:"pointer", fontSize:"1.2rem"}}/></Link>
                                   <FaTrash 
-                                     className="text-danger"
+                                     className="text-secondary"
                                      style={{cursor:"pointer", fontSize:"1.2rem"}}
                                      title="delete"
                                      onClick={()=>DeleteDiet(el.id)}
                                   />
                                   </td>
-                                  
-                                </tr>
-                          </tbody>
+                                </tr>)
                         })
-                      }
+                    }
+                          </tbody>
+                            <tfoot>
+                             <tr>
+                                 <td colSpan={12}>
+                                      <ResponsivePagination
+                                         current={currentPage}
+                                         total={totalPages}
+                                         onPageChange={setCurrentPage}
+                                         />
+                                 </td>
+                             </tr>
+                         </tfoot>
                   </table>
       
                 </div>

@@ -13,7 +13,7 @@ export default function UpdateDietDetails(){
     const [time, setTime]=useState("")
     const [protien, setProtien]=useState("")
     const [item,setItem]=useState("")
-    const [carbon, setCarbon]=useState("")
+    const [corbs, setCorbs]=useState("")
     const [quantity,setQuantity]=useState("")
     const [fats,setFats]=useState("")
     const [calorie, setCalorie]=useState("")
@@ -37,7 +37,7 @@ export default function UpdateDietDetails(){
        setTime(dietData.time)
        setProtien(dietData.protien)
        setItem(dietData.item)
-       setCarbon(dietData.carbon)
+       setCorbs(dietData.corbs)
        setQuantity(dietData.quantity)
        setFats(dietData.fats)
        setCalorie(dietData.calorie)
@@ -79,7 +79,7 @@ export default function UpdateDietDetails(){
       try{
         let data={
            diet,day,meal,time,protien,item,
-           carbon,quantity,fats,calorie,fibre,recipe,sugar,
+           corbs,quantity,fats,calorie,fibre,recipe,sugar,
            userType:1,
            status:true,
            createdAt:Timestamp.now()
@@ -262,17 +262,17 @@ export default function UpdateDietDetails(){
                       <div className="col-md-6">
                         <div className="form-group">
                           <label className="label" htmlFor="max">
-                             carbon
+                             Corbs
                           </label>
                            <input
                             type="text"
                             className="form-control"
-                            name="carbon"
-                            id="carbon"
-                            placeholder="Enter carbon"
-                            value={carbon}
+                            name="corbs"
+                            id="corbs"
+                            placeholder="Enter corbs"
+                            value={corbs}
                             onChange={(e)=>{
-                              setCarbon(e.target.value)
+                              setCorbs(e.target.value)
                             }}
                           />
                         </div>

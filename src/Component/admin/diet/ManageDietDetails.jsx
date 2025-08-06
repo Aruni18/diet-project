@@ -5,23 +5,30 @@ import { db } from "../../../firebase"
 import { toast } from "react-toastify"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
-import { PacmanLoader } from "react-spinners"
+import { MoonLoader } from "react-spinners"
 import { FaTrash, FaEdit } from "react-icons/fa"
 import axios from "axios"
+import ResponsivePagination from 'react-responsive-pagination'
+import 'react-responsive-pagination/themes/classic-light-dark.css';
+
 
 export default function ManageDietDetails(){
 
     const [load, setLoad]=useState(true)
     const [AllDiet, setAllDiet]=useState([])
+    const [currentPage, setCurrentPage]=useState(1)
+    const [totalPages, setTotalPages]=useState(1)
+    const limit=4
 
     const fetchData=()=>{
       const q=query(collection(db, "dietDetails"))
-        onSnapshot(q, (dietData)=>{
+        onSnapshot(q, (userCol)=>{
             setAllDiet(
-                dietData.docs.map((el)=>{
+                userCol.docs.map((el)=>{
                     return{id:el.id,...el.data()}
                 }))
                 setLoad(false)
+                setTotalPages(Math.ceil(userCol.docs.length/limit))
         })}
 
     useEffect(()=>{
@@ -86,28 +93,28 @@ export default function ManageDietDetails(){
   {/* <section className="ftco-section bg-light"> */}
     <div className="container my-5" >
     {load? 
-     <PacmanLoader color="#00BD56" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
+     <MoonLoader color="#0058bdff" size={30} cssOverride={{display:"block", margin: "0 auto"}} loading={load}/>
     :
       <div className="row justify-content-center">
         <div className="col-md-18" style={{boxShadow:"0px 0px 15px royalblue"}}>
 
              <div className="d-flex justify-content-end p-2">
-                 <Link to={"/admin/diet/DietDetails"}  className="btn btn-outline-primary">diet detail</Link>
+                 <Link to={"/admin/Pages/DietDetails"}  className="btn btn-outline-primary">diet detail</Link>
              </div>
              
                 <div className="contact-wrap w-100 p-md-5 p-4">
                   <h3 className="mb-4">Manage Diet Details</h3>
-                  <table className="table table-striped">
-                      <thead>
+                  <table className="table table-bordered table-hover table-striped">
+                      <thead className="table-primary">
                          <tr>
                            <th scope="col">#</th>
                            <th scope="col">Diet</th>
                            <th scope="col">Day</th>
-                            <th scope="col">Meal</th>
+                           <th scope="col">Meal</th>
                            <th scope="col">Time</th>
                            <th scope="col">Protien</th>
                            <th scope="col">Item</th>
-                           <th scope="col">carbon</th>
+                           <th scope="col">Corbs</th>
                            <th scope="col">Quantity</th>
                            <th scope="col">Fats</th>
                            <th scope="col">Calorie</th>
@@ -118,20 +125,19 @@ export default function ManageDietDetails(){
                            <th scope="col">Actions</th>
                          </tr>
                       </thead>
-
-
+                  <tbody>
                       {
-                        AllDiet.map((el,index)=>{
-                          return <tbody>
-                                <tr>
-                                  <th scope="row">{index+1}</th>
+                        AllDiet?.slice((currentPage-1)*limit,currentPage*limit)?.map((el,index)=>{
+                          return(
+                                <tr key={el.id}>
+                                  <td scope="row">{(currentPage-1)*limit+index+1}</td>
                                   <td>{el.diet}</td>
                                   <td>{el.day}</td>
                                   <td>{el.meal}</td>
                                   <td>{el.time}</td>
                                   <td>{el.protien}</td>
                                   <td>{el.item}</td>
-                                  <td>{el.carbon}</td>
+                                  <td>{el.corbs}</td>
                                   <td>{el.quantity}</td>
                                   <td>{el.fats}</td>
                                   <td>{el.calorie}</td>
@@ -142,30 +148,33 @@ export default function ManageDietDetails(){
                                   style={{height:"50px", width:"50px"}}/></td>
 
                                   <td>
-                                    <Link to={"/admin/diet/edit2/"+el.id }className="text-success mx-2" title="edit">
+                                    <Link to={"/admin/diet/edit2/"+el.id }className="text-warning mx-2" title="edit">
                                       <FaEdit style={{cursor:"pointer", fontSize:"1.2rem"}}/></Link>
                                   <FaTrash 
-                                     className="text-danger"
+                                     className="text-secondary"
                                      style={{cursor:"pointer", fontSize:"1.2rem"}}
                                      title="delete"
                                      onClick={()=>DeleteDiet(el.id)}
                                   />
                                   </td>
-                                  
-                                </tr>
-                          </tbody>
-                        })
-                      }
+                                </tr>)
+                              })}
+                        </tbody>
+                        <tfoot>
+                           <tr>
+                               <td colSpan={16}>
+                                    <ResponsivePagination
+                                       current={currentPage}
+                                       total={totalPages}
+                                       onPageChange={setCurrentPage}
+                                       />
+                               </td>
+                           </tr>
+                        </tfoot>
                   </table>
-      
                 </div>
               </div>
           </div> 
-          
-              //     </div>
-               //  </div>
-
-    
           }</div>
        {/* </section> */}
       </>

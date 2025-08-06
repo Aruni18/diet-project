@@ -21,6 +21,8 @@ import UpdateDiet from "./Component/admin/diet/UpdateDiet"
 import UpdateDietDetails from "./Component/admin/diet/UpdateDietDetails"
 import ManageUser from "./Component/admin/diet/user/ManageUser"
 import Dashboard from "./Component/admin/diet/pages/Dashboard"
+import RazorPayButton from "./Component/Pages/Payment"
+import ManagePayment from "./Component/admin/diet/user/ManagePayment"
 function App() {
   return (
    <>
@@ -38,11 +40,12 @@ function App() {
              <Route path="contact" element={<Contact/>}/>
              <Route path="login" element={<Login/>}/>
              <Route path="register" element={<Register/>}/>
+              <Route path="/payment" element={<RazorPayButton/>}/> 
          </Route>
       
          {/*admin layout*/}
           <Route path="/admin" element={<AdminLayout/>} >
-               <Route index element={<Dashboard/>}/>
+               <Route path="diet/pages/Dashboard" element={<Dashboard/>}/>
                <Route path="Pages/add" element={<AddDiet/>} /> 
                <Route path="Pages/DietDetails" element={<DietDetails/>} />
                <Route path="Pages/manageDiet" element={<ManageDiet/>} /> 
@@ -50,8 +53,10 @@ function App() {
                <Route path="diet/edit/:id" element={<UpdateDiet/>} /> 
                <Route path="diet/edit2/:id" element={<UpdateDietDetails/>} /> 
                <Route path="diet/user/ManageUser" element={<ManageUser/>} /> 
+               <Route path="diet/user/ManagePayment" element={<ManagePayment/>} />
           </Route>
 
+          {/* <Route path="/payment" element={<RazorPayButton/>}/>  */}
         </Routes>  
    </BrowserRouter>
    <ToastContainer/>

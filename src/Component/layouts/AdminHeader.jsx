@@ -8,16 +8,18 @@ export default function AdminHeader(){
     const nav=useNavigate()
 
     const logout=()=>{
+
+       
           const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger"
+          confirmButton: "btn btn-primary ",
+          cancelButton: "btn btn-danger mr-2 "
           },
           buttonsStyling: false
         });
           swalWithBootstrapButtons.fire({
           title: "Are you sure?",
-         // text: "You won't be able to revert this!",
+          text: "You won't be able to revert this!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonText: "Yes,Logout!",
@@ -52,14 +54,14 @@ export default function AdminHeader(){
     <div className="container">
       <div className="row justify-content-between">
         <div className="col d-flex align-items-center">
-          <p className="mb-0 phone">
+          <p className="mb-0 phone m-2">
             <span className="mailus">Phone no:</span>{" "}
             <a href="#">+00 1234 567</a> or{" "}
             <span className="mailus">email us:</span>{" "}
-            <a href="#">emailsample@email.com</a>
+            <a href="#">dietdiary@email.com</a>
           </p>
         </div>
-        <div className="col d-flex justify-content-end">
+        <div className="col d-flex justify-content-end m-2">
           <div className="social-media">
             <p className="mb-0 d-flex">
               <a
@@ -106,9 +108,9 @@ export default function AdminHeader(){
   >
     <div className="container">
       <Link className="navbar-brand" to="index.html">
-        Health
+        Diet-
         <span>
-          coach
+          Diary
           <i className="fa fa-leaf" />
         </span>
       </Link>
@@ -130,11 +132,11 @@ export default function AdminHeader(){
               Home
             </Link>
           </li>
-          {/* <li className="nav-item">
-            <Link to={"/admin/Pages/add"} className="nav-link">
-              Add Diet
+          <li className="nav-item">
+            <Link to={"/admin/diet/pages/Dashboard"} className="nav-link">
+               Dashboard
             </Link>
-          </li> */}
+          </li>
           <li class="dropdown nav-item">
             <a  class="nav-link dropdown-toggle" href="#" role="button" id="dropdpwnMenuLink"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -163,14 +165,14 @@ export default function AdminHeader(){
                 <Link class="dropdown-item" to={"/admin/Pages/manageDiet"}>Diet</Link>
                  <Link class="dropdown-item" to={"/admin/diet/ManageDietDetails"}>Diet Details</Link>
                 <Link class="dropdown-item" to={"/admin/diet/user/ManageUser"}>View Users</Link>
-                {/* <Link class="dropdown-item" to={"/admin/Pages/DietDetails"}>Subscription</Link> */}
+                <Link class="dropdown-item" to={"/admin/diet/user/ManagePayment" }>Payment</Link>
               </div>  
           </li>
-          <li className="nav-item">
-            <Link to={"/admin/subscription" }className="nav-link">
-              Manage Subscription
+          {/* <li className="nav-item">
+            <Link to={"/admin/diet/user/ManagePayment" }className="nav-link">
+                Payment
             </Link>
-          </li>
+          </li> */}
          { 
            isLogin?
            <li  className="nav-item">

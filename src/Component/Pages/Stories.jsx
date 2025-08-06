@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Stories(){
     return(
         <>
@@ -37,33 +39,12 @@ export default function Stories(){
             />
             <div className="text pl-md-5">
               <h4>
-                Story About: <span>John Doe</span>
+                Story About: <span>Aisha Khan</span>
               </h4>
               <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
-              </p>
-              <p>
-                <a href="#" className="btn btn-primary">
-                  Read more
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="story-wrap d-md-flex align-items-center">
-            <div
-              className="img"
-              style={{ backgroundImage: "url(assets/images/image_2.jpg)" }}
-            />
-            <div className="text pl-md-5">
-              <h4>
-                Story About: <span>John Doe</span>
-              </h4>
-              <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
+               Aisha, a college student, switched to a vegetarian diet after facing frequent 
+               digestion issues. She began her mornings with green smoothies and replaced fried snacks 
+               with sprouts. In just 6 weeks, her energy levels improved, and her acne reduced significantly.
               </p>
               <p>
                 <a href="#" className="btn btn-primary">
@@ -79,12 +60,34 @@ export default function Stories(){
             />
             <div className="text pl-md-5">
               <h4>
-                Story About: <span>John Doe</span>
+                Story About: <span>Rohit Mehta </span>
               </h4>
               <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
+                Rohit, a busy software developer, took on the challenge of intermittent fasting
+                 (16:8 method). He used this method to cut down unnecessary snacking. With two balanced 
+                 meals and black coffee during the fasting window, he shed 4kg in a month and felt mentally
+                  sharper.
+              </p>
+              <p>
+                <a href="#" className="btn btn-primary">
+                  Read more
+                </a>
+              </p>
+            </div>
+          </div>
+          <div className="story-wrap d-md-flex align-items-center">
+            <div
+              className="img"
+              style={{ backgroundImage: "url(assets/images/image_2.jpg)" }}
+            />
+            <div className="text pl-md-5">
+              <h4>
+                Story About: <span>Sneha Verma</span>
+              </h4>
+              <p>
+                Sneha, a new mom, focused on a protein-rich postpartum diet to regain strength. 
+                Her daily meals included boiled eggs, grilled chicken, and oats. She also drank plenty
+                of water and avoided processed sugar. Within two months, she felt stronger and more active.
               </p>
               <p>
                 <a href="#" className="btn btn-primary">
@@ -100,12 +103,13 @@ export default function Stories(){
             />
             <div className="text pl-md-5">
               <h4>
-                Story About: <span>John Doe</span>
+                Story About: <span>Arjun Nair</span>
               </h4>
               <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
+                Arjun, a 40-year-old banker, was diagnosed with pre-diabetes. He adopted a
+                 low-glycemic index (GI) diet filled with whole grains, leafy vegetables, and 
+                 lentils. He also tracked his sugar intake. After 3 months, his blood sugar 
+                 levels normalized.
               </p>
               <p>
                 <a href="#" className="btn btn-primary">
@@ -121,12 +125,12 @@ export default function Stories(){
             />
             <div className="text pl-md-5">
               <h4>
-                Story About: <span>John Doe</span>
+                Story About: <span> Meera Thomas</span>
               </h4>
               <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
+               Meera went on a 15-day fruit detox to beat bloating and fatigue. Her meals 
+               were colorful — papaya for breakfast, watermelon mid-day, and a mix of berries
+                and apples for dinner. Along with hydration and yoga, she felt lighter and refreshed.
               </p>
               <p>
                 <a href="#" className="btn btn-primary">
@@ -135,7 +139,8 @@ export default function Stories(){
               </p>
             </div>
           </div>
-          <div className="row mt-5">
+
+          {/* <div className="row mt-5">
             <div className="col">
               <div className="block-27">
                 <ul>
@@ -163,7 +168,8 @@ export default function Stories(){
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
+
         </div>{" "}
         {/* .col-md-8 */}
         <div className="col-lg-4 sidebar pl-lg-5 ftco-animate">
