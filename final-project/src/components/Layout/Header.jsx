@@ -39,7 +39,7 @@ export default function Header() {
                                 <span className="mailus">Phone no:</span>{" "}
                                 <a href="#">+9056060637</a> or{" "}
                                 <span className="mailus">email us:</span>{" "}
-                                <a href="#">fitfuel@gmail.com</a>
+                                <a href="#">DietDiary@gmail.com</a>
                             </p>
                         </div>
                         <div className="col d-flex justify-content-end">

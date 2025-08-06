@@ -149,7 +149,7 @@ export default function Contact() {
                                                 <div className="text pl-3">
                                                     <p>
                                                         <span>Email:</span>{" "}
-                                                        <a href="mailto:fitfuel@gmail.com">fitfuel@gmail.com</a>
+                                                        <a href="mailto:DietDiary@gmail.com">DietDiary@gmail.com</a>
                                                     </p>
                                                 </div>
                                             </div>

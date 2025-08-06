@@ -34,7 +34,7 @@ function Payment() {
       key: "rzp_test_e420SYXn4cnXqq", // Razorpay Key ID
       amount: price*100, // Amount in paisa (₹500)
       currency: "INR",
-      name: "FitFuel",
+      name: "DietDiary",
       description: "Product or Service",
       handler: async function (response) {
         // Save payment ID to Firebase Firestore
